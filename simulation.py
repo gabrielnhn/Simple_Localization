@@ -1,19 +1,19 @@
 #!/usr/bin/env python3
 import numpy as np
 from random import randrange
-import map_module
+from map_module import Map
 
+# Cria o mapa
+map = Map()
 ROBOT = '@'
 
-map = map_module.new_map()
-
+# Poe o Robo no mapa
 has_placed_robot = False
 while not has_placed_robot:
-    i = randrange(map_module.rows)
-    j = randrange(map_module.columns)
+    i = randrange(map.rows)
+    j = randrange(map.columns)
 
-    if map[i, j] == map_module.EMPTY:
-        map[i, j] = ROBOT
+    if map.matrix[i, j] == map.EMPTY:
+        map.matrix[i, j] = ROBOT
         has_placed_robot = True
-
-map_module.print_map(map)
+print(map)
