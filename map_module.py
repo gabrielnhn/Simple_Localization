@@ -6,11 +6,11 @@ Makes a numpy.ndarray of a map with some landmarks
 import numpy as np
 from random import randrange
 
-rows = 100
-columns = 100
+rows = 18
+columns = 18
 landmarks_count = 10
-EMPTY = "."
-LANDMARK = "L"
+EMPTY = "-"
+LANDMARK = "X"
 
 def new_map(rows, columns, landmarks_count):
     """Makes a numpy.ndarray of a map with some landmarks"""
@@ -30,3 +30,13 @@ def new_map(rows, columns, landmarks_count):
                 has_inserted = True
 
     return map
+
+
+def print_map(map):
+    for row in map:
+        for char in row:
+            print(char, end='')
+        print()
+        
+
+print_map(new_map(rows, columns, landmarks_count))
