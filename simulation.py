@@ -1,11 +1,19 @@
 #!/usr/bin/env python3
 import numpy as np
-# Let's print the whole matrix
-np.set_printoptions(threshold=np.inf)
-
+from random import randrange
 import map_module
 
-map = map_module.new_map(map_module.rows, map_module.columns,
-                         map_module.landmarks_count)
+ROBOT = '@'
 
-print(map)
+map = map_module.new_map()
+
+has_placed_robot = False
+while not has_placed_robot:
+    i = randrange(map_module.rows)
+    j = randrange(map_module.columns)
+
+    if map[i, j] == map_module.EMPTY:
+        map[i, j] = ROBOT
+        has_placed_robot = True
+
+map_module.print_map(map)

@@ -12,7 +12,7 @@ landmarks_count = 10
 EMPTY = "-"
 LANDMARK = "X"
 
-def new_map(rows, columns, landmarks_count):
+def new_map():
     """Makes a numpy.ndarray of a map with some landmarks"""
     # make map
     map = [[EMPTY for j in range(columns)] for i in range(rows)]
@@ -38,5 +38,3 @@ def print_map(map):
             print(char, end='')
         print()
         
-
-print_map(new_map(rows, columns, landmarks_count))
