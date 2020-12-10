@@ -5,6 +5,8 @@ Makes a numpy.ndarray of a map with some landmarks
 
 import numpy as np
 from random import randrange
+import cv2 as cv
+cv.namedWindow('map')
 
 def new_map(rows, columns, landmarks_count, EMPTY, LANDMARK):
     """Makes a numpy.ndarray of a map with some landmarks"""
@@ -36,8 +38,8 @@ def print_map(map):
 
 
 class Map:
-    rows = 18
-    columns = 18
+    rows = 100
+    columns = 100
     landmarks_count = 10
     EMPTY = "-"
     LANDMARK = "X"
@@ -48,3 +50,18 @@ class Map:
     
     def __str__(self):
         return print_map(self.matrix)
+
+    def get_picture(self, magnitude=8, negated=0):
+        if negated:
+            mask = np.ones((self.rows*magnitude, self.columns*magnitude))
+        else:
+            mask = np.zeros((self.rows*magnitude, self.columns*magnitude))
+
+        mask = np.array(mask)
+
+        for i in range(self.rows):
+            for j in range(self.columns):
+                if self.matrix[i, j] == self.LANDMARK:
+                    mask[i*magnitude:i*magnitude+magnitude-1, j*magnitude:j*magnitude+magnitude-1] = 255 * (not negated)
+
+        return mask

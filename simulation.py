@@ -2,6 +2,7 @@
 import numpy as np
 from random import randrange
 from map_module import Map
+import cv2
 
 # Cria o mapa
 map = Map()
@@ -16,4 +17,6 @@ while not has_placed_robot:
     if map.matrix[i, j] == map.EMPTY:
         map.matrix[i, j] = ROBOT
         has_placed_robot = True
-print(map)
+
+print("showing")
+map.show_picture(negated=1)
