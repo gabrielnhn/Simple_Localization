@@ -13,7 +13,7 @@ EMPTY = "."
 LANDMARK = "L"
 
 def new_map(rows, columns, landmarks_count):
-
+    """Makes a numpy.ndarray of a map with some landmarks"""
     # make map
     map = [[EMPTY for j in range(columns)] for i in range(rows)]
     map = np.array(map) # um pouco de eficiencia
