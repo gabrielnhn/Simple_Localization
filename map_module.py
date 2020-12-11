@@ -16,7 +16,7 @@ def new_map(rows, columns, landmarks_count, EMPTY, LANDMARK):
 
     # insert landmarks
     landmarks = []
-    for _ in range(landmarks_count):
+    for count in range(landmarks_count):
         has_inserted = False
         while not has_inserted:
             i = randrange(rows)
@@ -25,7 +25,7 @@ def new_map(rows, columns, landmarks_count, EMPTY, LANDMARK):
             if map[i, j] != LANDMARK: 
                 map[i, j] = LANDMARK
                 has_inserted = True
-                landmarks.append((j, i))
+                landmarks.append((count, (j, i)))
 
     return map, landmarks
 
@@ -42,7 +42,7 @@ def print_map(map):
 class Map:
     rows = 100
     columns = 100
-    landmarks_count = 10
+    landmarks_count = 5
     EMPTY = "-"
     LANDMARK = "X"
     
