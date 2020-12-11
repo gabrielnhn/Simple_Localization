@@ -70,4 +70,5 @@ if __name__ == "__main__":
 
 
     cv.imshow('map', new_pic)
+    # cv.imwrite('results/map5.png', new_pic)
     cv.waitKey(0)
