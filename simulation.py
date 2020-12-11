@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import math
 import numpy as np
 from random import randrange
 from map_module import Map
@@ -28,9 +29,22 @@ while True:
     
     robx, roby = robot_coord
 
+    robotDistToLandmarks = list()
+
+
     for landmark in map.landmarks:
         landx, landy = landmark
         cv.line(picture, (robx * 8, roby * 8), (landx*8, landy*8), (0,0,255))
+        
+        diffPoints = np.subtract(landmark, robot_coord)
+
+        robotDistToLandmarks.append(math.hypot(diffPoints[0],diffPoints[1]))
+
+    print(robotDistToLandmarks)
+        
+    
+    
+    
 
     cv.imshow('bgr', picture)
-    cv.waitKey(0)
+    cv.waitKey(5)
