@@ -4,8 +4,8 @@ import numpy as np
 from random import randrange
 from map_module import Map
 import cv2 as cv
-import collections
 
+# magnitude para imprimir um mapa maior
 magnitude = 8
 
 # Cria o mapa
@@ -34,9 +34,9 @@ def coefficients(robotDistToLandmarks, landmarks, l0, l1):
     bCoefficient = landmarks[l1][1] - landmarks[l0][1]
     return [aCoefficient, bCoefficient, indepCoefficient]
 
-# Main loop
 
-while True:
+if __name__ == "__main__":
+
     picture = map.get_picture(magnitude=magnitude,  negated=1)
     new_pic = picture[..., np.newaxis]
 
@@ -70,4 +70,4 @@ while True:
 
 
     cv.imshow('map', new_pic)
-    cv.waitKey(500)
+    cv.waitKey(0)
