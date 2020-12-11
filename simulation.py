@@ -38,7 +38,8 @@ def coefficients(robotDistToLandmarks, landmarks, l0, l1):
 
 while True:
     picture = map.get_picture(magnitude=magnitude,  negated=1)
-    
+    new_pic = picture[..., np.newaxis]
+
     robx, roby = robot_coord
 
     robotDistToLandmarks = []
@@ -46,14 +47,13 @@ while True:
 
     for ID, landmark in map.landmarks:
         landx, landy = landmark
-        cv.line(picture, (robx * magnitude, roby * magnitude), (landx*magnitude, landy*magnitude), (0,0,255))
+        cv.line(new_pic, (robx * magnitude, roby * magnitude), (landx*magnitude, landy*magnitude), (0,0,255))
         
         diffPoints = np.subtract(landmark, robot_coord)
 
         robotDistToLandmarks.append(math.hypot(diffPoints[0],diffPoints[1]))
         landmarks.append(landmark)
     
-    print(landmarks)
 
     firstCoefficients = coefficients(robotDistToLandmarks, landmarks, 0, 1)
     secondCoefficients = coefficients(robotDistToLandmarks, landmarks, 0, 2)
@@ -61,10 +61,13 @@ while True:
     a = np.array([firstCoefficients[:2],secondCoefficients[:2]])
     b = np.array([firstCoefficients[2], secondCoefficients[2]])
 
-    pose = np.linalg.solve(a,b)
-
+    pose = list(np.linalg.solve(a,b))
+    for i in range(len(pose)):
+        pose[i] = magnitude * int(pose[i])
+ 
     print(pose)
-    
+    cv.circle(new_pic, tuple(pose), magnitude, (0,255,0), cv.FILLED)
 
-    cv.imshow('bgr', picture)
+
+    cv.imshow('map', new_pic)
     cv.waitKey(500)
