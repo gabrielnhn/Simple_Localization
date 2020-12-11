@@ -33,8 +33,10 @@ while not has_placed_goal:
         goal_coord = (i, j)
         has_placed_goal = True
 
-picture = map.get_picture(1)
+picture = map.get_picture(negated=1)
 cv.imshow('map', picture)
+
+print(picture.shape)
 
 cv.waitKey(0)
 
@@ -53,13 +55,15 @@ def bfs(grid, start, goal, width, height):
 
 path = bfs(map.matrix, robot_coord, GOAL, map.columns, map.rows)
 
-
-bgr = cv.cvtColor(picture, cv.COLOR_GRAY2RGB)
-
 for grid in path:
-    pass
-    # cv.circle(bgr, grid, 1, (255,0,0))
-#cv.line(bgr, path[0], path[-1], (0,0,255))
+    x, y = grid
+    x, y = x * 8, y * 8
+    cv.circle(picture, (x, y), 10, (0,0,255))
 
-cv.imshow('bgr', bgr.astype('uint8') * 255)
+startx, starty = path[0]
+endx, endy = path[-1]
+
+cv.line(picture, (startx * 8, starty * 8), (endx*8, endy*8), (0,0,255))
+
+cv.imshow('bgr', picture)
 cv.waitKey(0)
