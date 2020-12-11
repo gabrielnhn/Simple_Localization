@@ -15,6 +15,7 @@ def new_map(rows, columns, landmarks_count, EMPTY, LANDMARK):
     map = np.array(map) # um pouco de eficiencia
 
     # insert landmarks
+    landmarks = []
     for _ in range(landmarks_count):
         has_inserted = False
         while not has_inserted:
@@ -24,8 +25,9 @@ def new_map(rows, columns, landmarks_count, EMPTY, LANDMARK):
             if map[i, j] != LANDMARK: 
                 map[i, j] = LANDMARK
                 has_inserted = True
+                landmarks.append((j, i))
 
-    return map
+    return map, landmarks
 
 
 def print_map(map):
@@ -45,7 +47,7 @@ class Map:
     LANDMARK = "X"
     
     def __init__(self):
-        self.matrix = new_map(self.rows, self.columns, self.landmarks_count,
+        self.matrix, self.landmarks = new_map(self.rows, self.columns, self.landmarks_count,
                               self.EMPTY, self.LANDMARK)
     
     def __str__(self):
