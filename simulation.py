@@ -6,6 +6,8 @@ from map_module import Map
 import cv2 as cv
 import collections
 
+magnitude = 8
+
 # Cria o mapa
 map = Map()
 ROBOT = '@'
@@ -25,7 +27,7 @@ while not has_placed_robot:
 # Main loop
 
 while True:
-    picture = map.get_picture(negated=1)
+    picture = map.get_picture(magnitude=magnitude,  negated=1)
     
     robx, roby = robot_coord
 
@@ -34,7 +36,7 @@ while True:
 
     for ID, landmark in map.landmarks:
         landx, landy = landmark
-        cv.line(picture, (robx * 8, roby * 8), (landx*8, landy*8), (0,0,255))
+        cv.line(picture, (robx * magnitude, roby * magnitude), (landx*magnitude, landy*magnitude), (0,0,255))
         
         diffPoints = np.subtract(landmark, robot_coord)
 
