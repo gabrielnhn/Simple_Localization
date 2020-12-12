@@ -4,13 +4,13 @@ Define map operations: create new map with random landmarks,
 get a picture of the map, print the map as a matrix.
 """
 
-__author__ = "Gabriel Nascarella Hishida and Allan Cedric"
+__author__ = "Gabriel Hishida and Allan Cedric"
 
 import numpy as np
 from random import randrange
 import cv2 as cv
 
-def new_map(rows, columns, landmarks_count, EMPTY, LANDMARK):
+def random_map(rows, columns, landmarks_count, EMPTY, LANDMARK):
     """Makes a numpy.ndarray of a map with random landmarks"""
     # make map
     map = [[EMPTY for j in range(columns)] for i in range(rows)]
@@ -52,7 +52,7 @@ class Map:
     
     def __init__(self):
         """Get a new random map"""
-        self.matrix, self.landmarks = new_map(self.rows, self.columns, self.landmarks_count,
+        self.matrix, self.landmarks = random_map(self.rows, self.columns, self.landmarks_count,
                               self.EMPTY, self.LANDMARK)
     
     def __str__(self):
