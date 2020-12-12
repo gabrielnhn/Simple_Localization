@@ -11,3 +11,5 @@ script used to plot the distance between the robot and the landmarks (chosen lan
 
 ### `results/`
 randomly generated maps and the robot's infered position plotted into png files
+
+![result1](results/map1.png)
