@@ -6,14 +6,12 @@ get a picture of the map, print the map as a matrix.
 
 __author__ = "Gabriel Nascarella Hishida and Allan Cedric"
 
-
 import numpy as np
 from random import randrange
 import cv2 as cv
-cv.namedWindow('map')
 
 def new_map(rows, columns, landmarks_count, EMPTY, LANDMARK):
-    """Makes a numpy.ndarray of a map with some landmarks"""
+    """Makes a numpy.ndarray of a map with random landmarks"""
     # make map
     map = [[EMPTY for j in range(columns)] for i in range(rows)]
     map = np.array(map) # um pouco de eficiencia
@@ -34,7 +32,8 @@ def new_map(rows, columns, landmarks_count, EMPTY, LANDMARK):
     return map, landmarks
 
 
-def print_map(map):
+def get_string(map):
+    """Get the map as a string"""
     str = ""
     for row in map:
         for char in row:
@@ -44,6 +43,7 @@ def print_map(map):
 
 
 class Map:
+    """Map class"""
     rows = 100
     columns = 100
     landmarks_count = 5
@@ -51,13 +51,16 @@ class Map:
     LANDMARK = "X"
     
     def __init__(self):
+        """Get a new random map"""
         self.matrix, self.landmarks = new_map(self.rows, self.columns, self.landmarks_count,
                               self.EMPTY, self.LANDMARK)
     
     def __str__(self):
-        return print_map(self.matrix)
+        """Get the matrix as a string"""
+        return get_string(self.matrix)
 
     def get_picture(self, magnitude=8, negated=0):
+        """Get a numpy BGR matrix of the map, augmented $magnitude times"""
         mask = np.zeros((self.rows*magnitude, self.columns*magnitude, 3), dtype=np.uint8)
         mask.fill(255 * negated)
         print(mask)
