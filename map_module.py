@@ -60,7 +60,6 @@ class Map:
         """Get a numpy BGR matrix of the map, augmented $magnitude times"""
         mask = np.zeros((self.rows*magnitude, self.columns*magnitude, 3), dtype=np.uint8)
         mask.fill(255 * negated)
-        print(mask)
 
         for i in range(self.rows):
             for j in range(self.columns):

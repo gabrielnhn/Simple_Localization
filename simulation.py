@@ -5,29 +5,34 @@ from random import randrange
 from map_module import Map
 import cv2 as cv
 
+
+# Map settings:
 ROWS = 100
 COLUMNS = 100
-LANDMARKS_COUNT = 5
+NUM_LANDMARKS = 5
 
-# magnitude para imprimir um mapa maior
+# Plotting a map $magnitude times bigger than the matrix:
 magnitude = 8
 
-# Cria um mapa com landmarks aleatorios
-map = Map()
-ROBOT = '@'
+# Make new random map
+map = Map(ROWS, COLUMNS, NUM_LANDMARKS)
 
-# Poe o Robo no mapa
+# Place the robot in the map (in an available cell)
+ROBOT_SYMBOL = '@'
 has_placed_robot = False
+
 while not has_placed_robot:
+    # Get random coordinate
     i = randrange(map.rows)
     j = randrange(map.columns)
 
+    # Try to place the robot
     if map.matrix[i, j] == map.EMPTY:
-        map.matrix[i, j] = ROBOT
+        map.matrix[i, j] = ROBOT_SYMBOL
         robot_coord = (j, i) # width, height coordinates
         has_placed_robot = True
 
-# Coeficientes da equação
+# Equation coefficients
 def coefficients(robotDistToLandmarks, landmarks, l0, l1):
     indepCoefficient = robotDistToLandmarks[l0] **2 - robotDistToLandmarks[l1] **2
     indepCoefficient -= (landmarks[l0][0] **2 + landmarks[l0][1] **2)
@@ -41,8 +46,6 @@ def coefficients(robotDistToLandmarks, landmarks, l0, l1):
 if __name__ == "__main__":
 
     picture = map.get_picture(magnitude=magnitude,  negated=1)
-    # Tentamos criar mais uma dimensao pra imagem ficar em BGR, mas falhamos
-    new_pic = picture
 
     robx, roby = robot_coord
 
@@ -50,35 +53,41 @@ if __name__ == "__main__":
     landmarks = []
 
     for ID, landmark in map.landmarks:
-        # Pra cada landmark no mapa, calcula a distancia entre ela e o robo
-        landx, landy = landmark
-        cv.line(new_pic, (robx * magnitude, roby * magnitude), (landx*magnitude, landy*magnitude), (255,0,0))
+        # For each landmark, compute the distance between itself and the robot
         
-        diffPoints = np.subtract(landmark, robot_coord)
+        # Get landmark position
+        landx, landy = landmark
 
+        # Store the distance
+        diffPoints = np.subtract(landmark, robot_coord)
         robotDistToLandmarks.append(math.hypot(diffPoints[0],diffPoints[1]))
+        # Store the landmark itself (without the ID)
         landmarks.append(landmark)
+
+        # Plot the distance 
+        cv.line(picture, (robx * magnitude, roby * magnitude), (landx*magnitude, landy*magnitude), (255,0,0))
     
-    # Cria um sistema de equacoes para obter a posicao do robo
+    # Make system of equations to get the robot's position
     firstCoefficients = coefficients(robotDistToLandmarks, landmarks, 0, 1)
     secondCoefficients = coefficients(robotDistToLandmarks, landmarks, 0, 2)
-
+    
     a = np.array([firstCoefficients[:2],secondCoefficients[:2]])
     b = np.array([firstCoefficients[2], secondCoefficients[2]])
 
-    # Resolve o sistema
-    pose = list(np.linalg.solve(a,b))
+    # Solve the system
+    position = list(np.linalg.solve(a,b))
+    print(position)
     
-    # Trata a pose para obter sua posicao na imagem
-    for i in range(len(pose)):
-        pose[i] = magnitude * int(pose[i])
- 
-    print(pose)
 
-    # Plota a pose na imagem
-    cv.circle(new_pic, tuple(pose), magnitude, (0,255,0), cv.FILLED)
+    # Get the coordinate to plot the robot (in the augmented map)
+    position_in_picture = []
+    for i in position:
+        position_in_picture.append(magnitude * int(i)) 
 
-    # Exibe a imagem
-    cv.imshow('map', new_pic)
+    # Plot the robot's position
+    cv.circle(picture, tuple(position_in_picture), magnitude, (0,255,0), cv.FILLED)
+
+    # Show the map
+    cv.imshow('map', picture)
     #cv.imwrite('map5.png', new_pic)
     cv.waitKey(0)
