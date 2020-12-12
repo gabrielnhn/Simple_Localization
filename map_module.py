@@ -18,7 +18,7 @@ def random_map(rows, columns, landmarks_count, EMPTY, LANDMARK):
     """Makes a numpy.ndarray of a map with random landmarks"""
     # make map
     map = [[EMPTY for j in range(columns)] for i in range(rows)]
-    map = np.array(map) # um pouco de eficiencia
+    map = np.array(map)
 
     # insert landmarks
     # landmarks are tuples of (ids, (landmark_coordinate))
