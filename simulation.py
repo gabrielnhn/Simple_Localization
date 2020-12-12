@@ -48,7 +48,7 @@ if __name__ == "__main__":
     for ID, landmark in map.landmarks:
         # Pra cada landmark no mapa, calcula a distancia entre ela e o robo
         landx, landy = landmark
-        cv.line(new_pic, (robx * magnitude, roby * magnitude), (landx*magnitude, landy*magnitude), (0,0,255))
+        cv.line(new_pic, (robx * magnitude, roby * magnitude), (landx*magnitude, landy*magnitude), (255,0,0))
         
         diffPoints = np.subtract(landmark, robot_coord)
 
