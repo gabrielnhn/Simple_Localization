@@ -68,6 +68,8 @@ if __name__ == "__main__":
         cv.line(picture, (robx * magnitude, roby * magnitude), (landx*magnitude, landy*magnitude), (255,0,0))
     
     # Make system of equations to get the robot's position
+    # (Yes, it is hardcoded to only get the 3 first landmarks)
+    
     firstCoefficients = coefficients(robotDistToLandmarks, landmarks, 0, 1)
     secondCoefficients = coefficients(robotDistToLandmarks, landmarks, 0, 2)
     
