@@ -1,4 +1,15 @@
 #!/usr/bin/env python3
+"""
+Place a robot in the map,
+and have it to deduce its own position
+according to its distance to 3 random landmarks
+
+Plot the map, the robot's real position and the infered position
+"""
+
+__author__ = "Gabriel Hishida and Allan Cedric"
+
+
 import math
 import numpy as np
 from random import randrange
@@ -69,7 +80,7 @@ if __name__ == "__main__":
     
     # Make system of equations to get the robot's position
     # (Yes, it is hardcoded to only get the 3 first landmarks)
-    
+
     firstCoefficients = coefficients(robotDistToLandmarks, landmarks, 0, 1)
     secondCoefficients = coefficients(robotDistToLandmarks, landmarks, 0, 2)
     
