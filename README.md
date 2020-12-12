@@ -1,13 +1,13 @@
 # Simple_Localization
 ## 'Mobile Robotics' Assignment #12
 
-Given a map with 5 landmarks, the 'robot' is able to deduce its coordinates given its distance to 3 of these landmarks.
+Given a map with N landmarks, the 'robot' is able to deduce its coordinates given its distance to 3 randomly selected landmarks.
 
 ### `map_module.py`
-is a messy module to make a new map with random landmarks
+module used to make maps with random landmarks and plot them in images.
 
 ### `simulation.py`
-is the script used to plot the map, its landmarks, the robot's actual position (the intersection of the lines) and its deduced position (black circle).
+script used to plot the distance between the robot and the landmarks, the robot's actual position (the intersection of the blue lines) and its deduced position (green circle).
 
 ### `results/`
-is where some resulting png files were stored to give an example of how the script works
+randomly generated maps and the robot's infered position plotted into png files
