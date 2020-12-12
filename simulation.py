@@ -20,7 +20,7 @@ import cv2 as cv
 # Map settings:
 ROWS = 100
 COLUMNS = 100
-NUM_LANDMARKS = 5
+NUM_LANDMARKS = 10
 
 # Plotting a map $magnitude times bigger than the matrix:
 magnitude = 8
@@ -63,6 +63,7 @@ if __name__ == "__main__":
     robotDistToLandmarks = []
     landmarks = []
 
+    count  = 0
     for ID, landmark in map.landmarks:
         # For each landmark, compute the distance between itself and the robot
         
@@ -76,8 +77,16 @@ if __name__ == "__main__":
         landmarks.append(landmark)
 
         # Plot the distance 
-        cv.line(picture, (robx * magnitude, roby * magnitude), (landx*magnitude, landy*magnitude), (255,0,0))
-    
+        if count < 3:
+            # if the landmark was chosen, print it purple
+            cv.line(picture, (robx * magnitude, roby * magnitude), (landx*magnitude, landy*magnitude), (128,0,128), thickness=magnitude//2)
+        else:
+            # print it blue
+            cv.line(picture, (robx * magnitude, roby * magnitude), (landx*magnitude, landy*magnitude),  (255,0,0))
+        
+        count += 1
+
+
     # Make system of equations to get the robot's position
     # (Yes, it is hardcoded to only get the 3 first landmarks)
 
