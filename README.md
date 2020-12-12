@@ -1,7 +1,7 @@
 # Simple_Localization
 ## 'Mobile Robotics' Assignment #12
 
-Given a map with N landmarks, the 'robot' is able to deduce its coordinates given its distance to 3 randomly selected landmarks.
+Given a map with N >= 3 landmarks, the 'robot' is able to deduce its coordinates given its distance to 3 randomly selected landmarks.
 
 ### `map_module.py`
 module used to make maps with random landmarks and plot them in images.
