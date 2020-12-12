@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Place a robot in the map,
-and have it to deduce its own position
+and have it deduce its own position
 according to its distance to 3 random landmarks
 
 Plot the map, the robot's real position and the infered position
