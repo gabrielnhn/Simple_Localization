@@ -16,22 +16,23 @@ LANDMARK_SYMBOL = "X"
 
 def random_map(rows, columns, landmarks_count, EMPTY, LANDMARK):
     """Makes a numpy.ndarray of a map with random landmarks"""
-    # make map
+    # make map matrix
     map = [[EMPTY for j in range(columns)] for i in range(rows)]
     map = np.array(map)
 
     # insert landmarks
-    # landmarks are tuples of (ids, (landmark_coordinate))
+    # landmarks are tuples of (ladmark_id, (landmark_coordinate))
     landmarks = []
     for count in range(landmarks_count):
-        has_inserted = False
-        while not has_inserted:
+        has_placed = False
+        while not has_placed:
             i = randrange(rows)
             j = randrange(columns)
 
+            # try to place
             if map[i, j] != LANDMARK: 
                 map[i, j] = LANDMARK
-                has_inserted = True
+                has_placed = True
                 landmarks.append((count, (j, i)))
 
     return map, landmarks
