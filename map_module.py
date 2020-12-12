@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 """
-Makes a numpy.ndarray of a map with some landmarks
+Define map operations: create new map with random landmarks,
+get a picture of the map, print the map as a matrix.
 """
+
+__author__ = "Gabriel Nascarella Hishida and Allan Cedric"
+
 
 import numpy as np
 from random import randrange
