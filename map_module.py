@@ -21,6 +21,7 @@ def random_map(rows, columns, landmarks_count, EMPTY, LANDMARK):
     map = np.array(map) # um pouco de eficiencia
 
     # insert landmarks
+    # landmarks are tuples of (ids, (landmark_coordinate))
     landmarks = []
     for count in range(landmarks_count):
         has_inserted = False
