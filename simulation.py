@@ -76,5 +76,5 @@ if __name__ == "__main__":
 
     # Exibe a imagem
     cv.imshow('map', new_pic)
-    cv.imwrite('map.png', new_pic)
+    #cv.imwrite('map5.png', new_pic)
     cv.waitKey(0)
