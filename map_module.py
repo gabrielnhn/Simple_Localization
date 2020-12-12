@@ -54,9 +54,9 @@ class Map:
         return print_map(self.matrix)
 
     def get_picture(self, magnitude=8, negated=0):
-        mask = np.zeros((self.rows*magnitude, self.columns*magnitude), dtype=np.uint8)
-
+        mask = np.zeros((self.rows*magnitude, self.columns*magnitude, 3), dtype=np.uint8)
         mask.fill(255 * negated)
+        print(mask)
 
         for i in range(self.rows):
             for j in range(self.columns):

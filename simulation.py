@@ -38,7 +38,7 @@ if __name__ == "__main__":
 
     picture = map.get_picture(magnitude=magnitude,  negated=1)
     # Tentamos criar mais uma dimensao pra imagem ficar em BGR, mas falhamos
-    new_pic = picture[..., np.newaxis]
+    new_pic = picture
 
     robx, roby = robot_coord
 
