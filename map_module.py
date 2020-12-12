@@ -10,6 +10,10 @@ import numpy as np
 from random import randrange
 import cv2 as cv
 
+# MACROS: 
+EMPTY_SYMBOL = "-"
+LANDMARK_SYMBOL = "X"
+
 def random_map(rows, columns, landmarks_count, EMPTY, LANDMARK):
     """Makes a numpy.ndarray of a map with random landmarks"""
     # make map
@@ -31,33 +35,25 @@ def random_map(rows, columns, landmarks_count, EMPTY, LANDMARK):
 
     return map, landmarks
 
-
-def get_string(map):
-    """Get the map as a string"""
-    str = ""
-    for row in map:
-        for char in row:
-            str += char
-        str += "\n"
-    return str
-
-
 class Map:
     """Map class"""
-    rows = 100
-    columns = 100
-    landmarks_count = 5
-    EMPTY = "-"
-    LANDMARK = "X"
+    EMPTY = EMPTY_SYMBOL
+    LANDMARK = LANDMARK_SYMBOL
     
-    def __init__(self):
+    def __init__(self, rows, columns, num_landmarks):
         """Get a new random map"""
-        self.matrix, self.landmarks = random_map(self.rows, self.columns, self.landmarks_count,
+        self.rows, self.columns, self.num_landmarks = rows, columns, num_landmarks
+        self.matrix, self.landmarks = random_map(self.rows, self.columns, self.num_landmarks,
                               self.EMPTY, self.LANDMARK)
     
     def __str__(self):
         """Get the matrix as a string"""
-        return get_string(self.matrix)
+        str = ""
+        for row in self.matrix:
+            for char in row:
+                str += char
+            str += "\n"
+        return str
 
     def get_picture(self, magnitude=8, negated=0):
         """Get a numpy BGR matrix of the map, augmented $magnitude times"""

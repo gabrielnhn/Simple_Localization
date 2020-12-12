@@ -5,6 +5,10 @@ from random import randrange
 from map_module import Map
 import cv2 as cv
 
+ROWS = 100
+COLUMNS = 100
+LANDMARKS_COUNT = 5
+
 # magnitude para imprimir um mapa maior
 magnitude = 8
 
